@@ -51,7 +51,7 @@
   
 
 
-fetch("{{ Config::get('api.v1.url') }}/loja?token={!! Config::get('api.v1.token') !!}&idloja={{ $id }}").then(function(response) {
+fetch("{{ Config::get('api.v1.url') }}/item/{!! Config::get('api.v1.token') !!}?id={{ $id }}").then(function(response) {
 	  var contentType = response.headers.get("content-type");
 	  if(contentType && contentType.indexOf("application/json") !== -1) {
 	    return response.json().then(function(json) {
@@ -59,19 +59,24 @@ fetch("{{ Config::get('api.v1.url') }}/loja?token={!! Config::get('api.v1.token'
 	      
 	      
 	     
-	    	p = json
-	    	// console.log(json);
-	    	 $("#id").html(p[0].produto.id);
-	    	 $("#descricao").html(p[0].produto.descricao);
-	    	 $("#preco").html("R$ " + (p[0].preco.toFixed(2)).replace(".",","));
-	    	 $("#ficha").html(p[0].produto.ficha);
-	    	 $("#cartao").html(p[0].preco/10);
+	    	p = json[0];
+	    	 console.log(json);
+
+	    	
+
+	  
+	    	 
+	    	 $("#id").html(p.produto.id);
+	    	 $("#descricao").html(p.produto.descricao);
+	    	 $("#preco").html("R$ " + (parseFloat(p.preco).toFixed(2)).replace(".",","));
+	    	 $("#ficha").html(p.produto.ficha);
+	    	 $("#cartao").html(p.preco/10);
 		
 	    	 //$("#capa").src("ImagensServlet?id=" + p[0].ID);
-	    	 document.getElementById("capa").src= "{{ Config::get('api.v1.pics') }}/getbyitem/" + p[0].produto.id;
+	    	 document.getElementById("capa").src= "{{ Config::get('api.v1.pics') }}/getbyitem/" + p.produto.id;
 
-	    	 if(p[0].demanda > 0 ){
-	    		 document.getElementById("bt-carrinho").onclick= function() { setsession( p[0].idloja); }
+	    	 if(p.demanda > 0 ){
+	    		 document.getElementById("bt-carrinho").onclick= function() { setsession( p.idloja); }
 					
  			} else {
  				document.getElementById("bt-carrinho").className="btn btn-secondary";
@@ -80,7 +85,7 @@ fetch("{{ Config::get('api.v1.url') }}/loja?token={!! Config::get('api.v1.token'
  			}
 	    	 
 
-	    	 fetch("{{ Config::get('api.v1.url') }}/pics?produto=" + p[0].produto.id).then(function(response) {
+	    	 fetch("{{ Config::get('api.v1.url') }}/pics/{!! Config::get('api.v1.token') !!}?id=" + p.produto.id).then(function(response) {
 	    		
 	    		  var contentType = response.headers.get("content-type");
 	    		  if(contentType && contentType.indexOf("application/json") !== -1) {

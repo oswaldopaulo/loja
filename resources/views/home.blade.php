@@ -67,12 +67,12 @@
   <!-- Produtos termina aqui -->
   <script type="text/javascript">
 
-	fetch("{{ Config::get('api.v1.url') }}/loja?token={!! Config::get('api.v1.token') !!}").then(function(response) {
+	fetch("{{ Config::get('api.v1.url') }}/loja/{!! Config::get('api.v1.token') !!}").then(function(response) {
 	  var contentType = response.headers.get("content-type");
 	  if(contentType && contentType.indexOf("application/json") !== -1) {
 	    return response.json().then(function(json) {
 	      // process your JSON further
-	    	//console.log(json);
+	    	console.log(json);
 	    	orderAddRow(json)
 	    });
 	  } else {
