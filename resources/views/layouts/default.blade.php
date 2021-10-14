@@ -120,6 +120,7 @@
    <div class="row mb-4">
        
       <div class="card-body">
+   
      
         <h6 class="card-title" id="footerEmpresa">Empresa</h6>
         <p class="card-text"><strong>CNPJ:</strong> <span id="footerCnpj"></span> <strong>Endereço:</strong> <span id="footerEndereco"></span>, <span id="footerNum"></span> <span id="footerBairro"></span> <span id="footerCidade"></span>-<span id="footerUf"></span>.</p>
@@ -143,7 +144,7 @@ fetch("{{ Config::get('api.v1.url') }}/empresa/{!! Config::get('api.v1.token') !
 	      
 	     
 	    	//p = json.Produtos;
-	    	console.log(json);
+	    	
 	    	if(document.getElementById("idempresa"))  idempresa.value = json.id;
 	    	if(document.getElementById("loginidempresa"))  idempresa.value = json.id;
 	    	
@@ -269,7 +270,7 @@ function setsession(id){
 			 return false;
 	  }
 	
-	fetch("{{ Config::get('api.v1.url') }}/loja?token={!! Config::get('api.v1.token') !!}&idloja=" + id).then(function(response) {
+	  fetch("{{ Config::get('api.v1.url') }}/item/{!! Config::get('api.v1.token') !!}?id=" + id).then(function(response) {
 	  var contentType = response.headers.get("content-type");
 	  if(contentType && contentType.indexOf("application/json") !== -1) {
 	    return response.json().then(function(json) {
@@ -284,14 +285,18 @@ function setsession(id){
 	   		
 	   		t = $.cookie('produtos');
 
-
+		
 	   		
 	   		json[0].qtd = 1;
-	   		
+
+
+	   	
 
 	   		if(t == null){
 	   			t=json;
 	   			total += parseFloat(json[0].preco*json[0].qtd);
+
+	   			
 		   		
 	   		}	else{
 
@@ -310,6 +315,9 @@ function setsession(id){
 					t.push(json[0]);
 				}
 	   		}
+
+	   	
+	   		
 
 	   		$.cookie('produtos', t);
 	   		$.cookie('total', total);

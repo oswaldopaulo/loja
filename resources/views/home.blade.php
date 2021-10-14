@@ -72,7 +72,7 @@
 	  if(contentType && contentType.indexOf("application/json") !== -1) {
 	    return response.json().then(function(json) {
 	      // process your JSON further
-	    	console.log(json);
+	    
 	    	orderAddRow(json)
 	    });
 	  } else {

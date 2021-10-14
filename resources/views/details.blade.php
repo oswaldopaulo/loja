@@ -60,8 +60,7 @@ fetch("{{ Config::get('api.v1.url') }}/item/{!! Config::get('api.v1.token') !!}?
 	      
 	     
 	    	p = json[0];
-	    	 console.log(json);
-
+	    	
 	    	
 
 	  
@@ -76,7 +75,9 @@ fetch("{{ Config::get('api.v1.url') }}/item/{!! Config::get('api.v1.token') !!}?
 	    	 document.getElementById("capa").src= "{{ Config::get('api.v1.pics') }}/getbyitem/" + p.produto.id;
 
 	    	 if(p.demanda > 0 ){
-	    		 document.getElementById("bt-carrinho").onclick= function() { setsession( p.idloja); }
+	    		 document.getElementById("bt-carrinho").onclick= function() { setsession(p.idloja); }
+	    		 console.log(p.idloja);
+	    		 
 					
  			} else {
  				document.getElementById("bt-carrinho").className="btn btn-secondary";
