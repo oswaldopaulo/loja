@@ -226,7 +226,7 @@
  
 		var valor =  $.cookie('total');
 
-		valor = valor.replace("R$ ","")
+		//valor = valor.replace("R$ ","")
 		valor=parseFloat(valor);
 		
 	
