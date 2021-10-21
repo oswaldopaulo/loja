@@ -116,8 +116,24 @@ class AuthController extends Controller
             ]);
             
             
-            if(Request::input('cep')!=0){
-                DB::table('trasacoes_entrega')->insert([
+            DB::table('transacoes_contato')->insert([
+                
+                'idtrans'=>$id,
+                'cep'=>$user[0]->cep,
+                'endereco'=>$user[0]->rua,
+                'numero'=>$user[0]->numero,
+                'bairro'=>$user[0]->bairro,
+                'cidade'=>$user[0]->cidade,
+                'uf'=>$user[0]->uf,
+                'nome'=>$user[0]->name,
+                'telefone'=>$user[0]->telefone,
+                'email'=>$user[0]->email,
+                'cpf'=>$user[0]->cpf,
+                
+            ]);
+            
+            if(Request::input('cep')>0){
+                DB::table('transacoes_entrega')->insert([
                     
                     'idtrans'=>$id, 
                     'cep'=>$user[0]->cep, 
@@ -127,7 +143,9 @@ class AuthController extends Controller
                     'cidade'=>$user[0]->cidade, 
                     'uf'=>$user[0]->uf, 
                     'nome'=>$user[0]->name, 
-                    'telefone'=>$user[0]->telefone
+                    'telefone'=>$user[0]->telefone,
+                    'email'=>$user[0]->email,
+                    'cpf'=>$user[0]->cpf,
                     
                 ]);
             
