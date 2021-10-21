@@ -116,7 +116,7 @@ class AuthController extends Controller
             ]);
             
             
-            if(Request::input('cep')==0){
+            if(Request::input('cep')!=0){
                 DB::table('trasacoes_entrega')->insert([
                     
                     'idtrans'=>$id, 

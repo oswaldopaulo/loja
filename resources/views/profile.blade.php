@@ -250,7 +250,7 @@
   <script type="text/javascript">
 
 
-  fetch("{{ Config::get('api.v1.url') }}/transacoes?token={!! Config::get('api.v1.token') !!}&iduser=" + {{ Auth::user()->id }}   ).then(function(response) {
+  fetch("{{ Config::get('api.v1.url') }}/transacoes/token={!! Config::get('api.v1.token') !!}&iduser=" + {{ Auth::user()->id }}   ).then(function(response) {
 	  var contentType = response.headers.get("content-type");
 	  if(contentType && contentType.indexOf("application/json") !== -1) {
 	    return response.json().then(function(json) {
