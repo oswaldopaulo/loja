@@ -20,8 +20,8 @@
 
 	<td>{{$r->description}}</td>
 	<td>{{$r->quantity}}</td>
-	<td>{{$r->price_unit}}</td>
-	<td>{{$r->price_unit * $r->quantity}}</td>
+	<td> R$ {{str_replace('.',',',$r->price_unit)}}</td>
+	<td> R$ {{ str_replace('.',',',($r->price_unit * $r->quantity))}}</td>
 </tr>
 @endforeach
 

@@ -42,16 +42,19 @@
               	<div class="col-md-12 detail-grid-col">
             		<div class="col-md-12">
             			<div class="row mb-4" style="border-bottom: 1px solid;" >
-            			     <div class="col-md-4">
+            			     <div class="col-md-2">
             			    	 Pedido
             			     </div>
-            			      <div class="col-md-2">
+            			      <div class="col-md-3">
             			    	 Data
             			     </div>
             			       <div class="col-md-2">
             			    	 Valor
             			     </div>
-            			      <div class="col-md-4">
+            			      <div class="col-md-2">
+            			    	 Frete
+            			     </div>
+            			      <div class="col-md-3">
             			    	 Status
             			     </div>
             			  </div>
@@ -250,7 +253,7 @@
   <script type="text/javascript">
 
 
-  fetch("{{ Config::get('api.v1.url') }}/transacoes/token={!! Config::get('api.v1.token') !!}&iduser=" + {{ Auth::user()->id }}   ).then(function(response) {
+  fetch("{{ Config::get('api.v1.url') }}/transacoes/{!! Config::get('api.v1.token') !!}?iduser=" + {{ Auth::user()->id }}   ).then(function(response) {
 	  var contentType = response.headers.get("content-type");
 	  if(contentType && contentType.indexOf("application/json") !== -1) {
 	    return response.json().then(function(json) {
@@ -272,26 +275,29 @@
 		var valor = 0;
 	    $.each($data,function(index,value) {
 	    	
-	  		if(value.status=="A"){
+	  		if(value.status=="Aberto"){
 
-	  			value.status = "<a href=\"{!! Config::get('api.v1.micro') !!}/paywithpaypal/" + value.id + "\">A</a>";
+	  			value.status = "<a href=\"{!! Config::get('api.v1.micro') !!}/paywithpaypal/" + value.id + "\">Aberto</a>";
 	  		}
 	        
 	            
 	            
 	        var row = 	"<div class=\"row mb-4\" style=\"border-bottom: 1px solid;\" >"
-		     + "<div class=\"col-md-4\">"
+		     + "<div class=\"col-md-2\">"
 		     	
 			+   "<h6><a href=\"#\" onclick=\"openwindows('{{ url('itens') }}/"+ value.id +"')\"> <i class=\"fa fa-eye\" aria-hidden=\"true\"></i>" + value.id+ "</a></h6>"
 		   // +	"<p>descricao</p>"
 		    + "</div>"
-		    +  "<div class=\"col-md-2\">"
+		    +  "<div class=\"col-md-3\">"
 		    +	value.data_trans
 		    + "</div>"
 		    +   "<div class=\"col-md-2\">"
-		    +	parseFloat(value.total + value.valorfrete).toFixed(2)
+		    +	"R$ " + parseFloat(value.total + value.valorfrete).toFixed(2).replace(".",",")
 		    + "</div>"
-		    +  "<div class=\"col-md-4\">"
+		    +   "<div class=\"col-md-2\">"
+		    +	"R$ " + parseFloat(value.valorfrete).toFixed(2).replace(".",",")
+		    + "</div>"
+		    +  "<div class=\"col-md-3\">"
 		    +	 value.status
 		    + "</div>"
 		  +   "</div>";
