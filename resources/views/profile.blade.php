@@ -57,6 +57,7 @@
             			      <div class="col-md-3">
             			    	 Status
             			     </div>
+            			     
             			  </div>
             	     </div>
             	     
@@ -278,8 +279,13 @@
 	  		if(value.status=="Aberto"){
 
 	  			value.status = "<a href=\"{!! Config::get('api.v1.micro') !!}/paywithpaypal/" + value.id + "\">Aberto</a>";
+	  		} else if(value.status=="Faturado") {
+	  			value.status = "<a href=\"{!! Config::get('api.v1.micro') !!}/faturado/" + value.id + "\" target=\"new\">Faturado</a>";
+	  		} else if(value.status=="Em transporte") {
+	  			value.status = "<a href=\"{!! Config::get('api.v1.micro') !!}/emtransporte/" + value.id + "\" target=\"new\">Em transporte</a>";
 	  		}
-	        
+
+	  		
 	            
 	            
 	        var row = 	"<div class=\"row mb-4\" style=\"border-bottom: 1px solid;\" >"
